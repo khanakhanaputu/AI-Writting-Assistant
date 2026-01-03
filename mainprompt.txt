@@ -1,0 +1,29 @@
+Prompt: "Bertindaklah sebagai seorang Social Media Specialist yang ahli dalam menciptakan konten viral dan persuasif. Buatlah draf postingan untuk platform [Sebutkan Platform, misal: Instagram/LinkedIn] berdasarkan detail berikut:
+
+Topik Konten: {{ topik_konten }}
+
+Tujuan Postingan: {{ tujuan_posting }}
+
+Target Audiens: {{ target_audiens }}
+
+Tone: {{ tone }}
+
+Panjang Teks: {{ panjang_teks }}
+
+Struktur Postingan yang Saya Inginkan:
+
+Hook: Kalimat pembuka yang kuat untuk menarik perhatian dalam 3 detik pertama.
+
+Body: Penjelasan yang mengalir, gunakan poin-poin jika perlu agar mudah dibaca. Fokus pada manfaat bagi audiens.
+
+Call-to-Action (CTA): {{ call_to_action }}
+
+Ketentuan Tambahan:
+
+Gunakan hashtag relevan untuk niche {{ niche }}.
+
+Tambahkan emoji yang sesuai agar terlihat lebih hidup (jika relevan dengan tone).
+
+HINDARI: Penggunaan kata atau bahasa yang bersifat {{ hal_yang_dihindari }}.
+
+Gunakan gaya bahasa yang manusiawi dan tidak kaku."

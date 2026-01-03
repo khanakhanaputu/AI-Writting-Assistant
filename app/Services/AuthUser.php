@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Two\AbstractProvider;
+use Laravel\Socialite\Socialite;
 
 class AuthUser
 {
@@ -33,5 +35,27 @@ class AuthUser
         }
 
         return back()->withErrors('msg', 'Username dan Password Salah!');
+    }
+
+    public function googleLogin()
+    {
+        /** @var AbstractProvider $provider */
+        $provider = Socialite::driver('google');
+
+        $googleUser = $provider->stateless()->user();
+
+        $user = User::where('g_id', $googleUser->id)->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'g_id' => $googleUser->id,
+                'password' => bcrypt(str()->random(16)),
+            ]);
+        }
+
+        Auth::login($user);
+        return redirect(route('ai.get'));
     }
 }

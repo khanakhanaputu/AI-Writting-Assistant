@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\AuthUser;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class AuthGoogleController extends Controller
 {
@@ -17,19 +15,8 @@ class AuthGoogleController extends Controller
 
     public function callback()
     {
-        $googleUser = Socialite::driver('google')->user();
-        $user = User::where('google_id', $googleUser['id'])->first();
+        $auth = new AuthUser();
 
-        if (!$user) {
-            $user = User::create([
-                'name' => $googleUser['name'],
-                'email' => $googleUser['email'],
-                'google_id' => $googleUser['id'],
-                'password' => bcrypt(str()->random(16)),
-            ]);
-        }
-
-        Auth::login($user);
-        return redirect('/dashboard');
+        return $auth->googleLogin();
     }
 }

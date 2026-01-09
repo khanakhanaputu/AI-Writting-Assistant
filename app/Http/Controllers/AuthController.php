@@ -42,7 +42,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string'
         ]);
 
         return $this->auth->login($validated['name'], $validated['password']);

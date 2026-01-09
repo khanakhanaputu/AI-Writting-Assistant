@@ -34,7 +34,7 @@ class AuthUser
             return redirect()->intended('/ai');
         }
 
-        return back()->withErrors('msg', 'Username dan Password Salah!');
+        return back()->withErrors(['msg' => 'Username dan Password salah']);
     }
 
     public function googleLogin()
@@ -43,7 +43,6 @@ class AuthUser
         $provider = Socialite::driver('google');
 
         $googleUser = $provider->stateless()->user();
-
         $user = User::where('g_id', $googleUser->id)->first();
 
         if (!$user) {

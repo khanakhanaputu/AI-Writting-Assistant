@@ -6,9 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/login', function () {
-//     return view('welcome');
-// })->name('login');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/ai', [TestController::class, 'index'])->name('ai.get')->middleware('auth');
 Route::post('/ai', [TestController::class, 'TestResponse'])->name('ai.post');
@@ -20,7 +20,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
 
 Route::get('/profile', fn() => view('user.profile'));
 
-Route::get('/login', [AuthController::class, 'loginForm']);
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('user.login');
 
 

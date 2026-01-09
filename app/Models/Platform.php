@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\ContentGeneration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tone extends Model
+class Platform extends Model
 {
-    protected $fillable = ['tone_name', 'description'];
+    protected $fillable = ['platform_name', 'character_limit'];
 
-    // Relasi: Satu tone bisa digunakan di banyak riwayat konten
+    // Relasi: Satu platform punya banyak riwayat konten
     public function contentGenerations(): HasMany
     {
         return $this->hasMany(ContentGeneration::class);

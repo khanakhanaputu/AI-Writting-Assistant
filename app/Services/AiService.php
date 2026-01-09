@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Http;
 
 class AiService
 {
-    public static function AiFetch($prompt)
+    public static function AiFetch(String $prompt)
     {
+
 
         /** @var Response $response */
         $response = Http::withHeaders([

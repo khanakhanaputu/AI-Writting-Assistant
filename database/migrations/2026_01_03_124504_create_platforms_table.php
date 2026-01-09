@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tones', function (Blueprint $table) {
+        Schema::create('platforms', function (Blueprint $table) {
             $table->id();
-            $table->string('tone_name'); // Contoh: Profesional, Santai
-            $table->text('description')->nullable();
+            $table->string('platform_name'); // Contoh: Instagram
+            $table->integer('character_limit')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tones');
+        Schema::dropIfExists('platforms');
     }
 };

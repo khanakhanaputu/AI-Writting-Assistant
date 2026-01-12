@@ -14,7 +14,7 @@ class AuthUser
     {
 
         if (User::where('name', $username)->exists() || User::where('email', $email)->exists()) {
-            return view('user.register')->with('msg', 'user already exists');
+            return back()->withErrors('User Already Used!');
         }
         $user = User::create([
             'name' => $username,
@@ -24,7 +24,7 @@ class AuthUser
 
         Auth::login($user);
 
-        return view('user.register')->with('msg', 'success');
+        return redirect('/ai');
     }
 
     public function login($username, $password)

@@ -28,7 +28,7 @@ class AuthController extends Controller
         ]);
 
         if ($validated['password'] !== $validated['confirm_password']) {
-            return view('user.register')->with('msg', 'password tidak sama!');
+            return back()->withErrors('Password not same!');
         }
         return $this->auth->register($validated['name'], $validated['password'], $validated['email']);
     }

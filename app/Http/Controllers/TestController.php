@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        return view('test.test');
+        return view('Test.test');
     }
     public function TestResponse(Request $request)
     {

@@ -71,9 +71,9 @@
                     <label class="text-xs font-semibold text-gray-500 uppercase ml-1 mb-2 block">Confirm Password</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                            <i class="fa-solid fa-shield-check"></i>
+                            <i class="fa-solid fa-shield"></i>
                         </span>
-                        <input type="password" name="password_confirmation" placeholder="••••••••" required
+                        <input type="password" name="confirm_password" placeholder="••••••••" required
                             class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all text-sm">
                     </div>
                 </div>

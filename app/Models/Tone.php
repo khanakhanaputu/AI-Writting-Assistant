@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tone extends Model
 {
-    protected $fillable = ['tone_name', 'description'];
-
-    // Relasi: Satu tone bisa digunakan di banyak riwayat konten
-    public function contentGenerations(): HasMany
+    protected $guarded = ['id'];
+    public function promptGenerations(): HasMany
     {
-        return $this->hasMany(ContentGeneration::class);
+        return $this->hasMany(PromptGeneration::class);
     }
 }

@@ -50,6 +50,6 @@ class AuthController extends Controller
 
     public function loginForm()
     {
-        return view('user.login');
+        return view('pages.user.login');
     }
 }

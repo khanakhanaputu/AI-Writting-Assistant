@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
                 'platform_name' => 'instagram'
             ],
             [
-                'platform_name' => 'Facebook'
+                'platform_name' => 'Facebook                                                                                                        '
             ]
         ]);
     }

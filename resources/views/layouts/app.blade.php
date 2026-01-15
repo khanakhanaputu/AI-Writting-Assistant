@@ -13,10 +13,11 @@
 </head>
 
 <body>
-    <x-home-navbar></x-home-navbar>
+    <x-home.home-navbar></x-home.home-navbar>
     <main>
         @yield('content')
     </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 
 </html>

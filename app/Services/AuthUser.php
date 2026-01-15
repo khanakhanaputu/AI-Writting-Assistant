@@ -55,6 +55,6 @@ class AuthUser
         }
 
         Auth::login($user);
-        return redirect(route('ai.get'));
+        return redirect('/dashboard');
     }
 }

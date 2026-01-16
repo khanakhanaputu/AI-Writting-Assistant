@@ -28,4 +28,10 @@ class PromptGeneration extends Model
     {
         return $this->belongsTo(Language::class);
     }
+
+    // Rekasi k user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

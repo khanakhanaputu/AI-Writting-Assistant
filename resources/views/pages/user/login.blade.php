@@ -127,7 +127,7 @@
 
                 <p class="text-center text-sm text-slate-500 mt-8">
                     Don't have an account?
-                    <a href="#"
+                    <a href="/register"
                         class="font-bold text-indigo-600 hover:text-indigo-500 hover:underline transition-all">Create
                         Account</a>
                 </p>

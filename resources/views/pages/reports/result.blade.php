@@ -15,7 +15,7 @@
                     <div class="flex items-center gap-2 text-sm text-slate-500 font-medium mt-1">
                         <span>Generated Content</span>
                         <i class="fa-solid fa-circle text-[4px] text-slate-300"></i>
-                        <span>ID: #GX-8821</span>
+                        <span>ID: {{ $promptGeneration->id }}</span>
                     </div>
                 </div>
             </div>
@@ -47,8 +47,7 @@
                             <span class="text-xs font-bold uppercase tracking-widest">Original Prompt</span>
                         </div>
                         <p class="text-slate-100 font-medium text-lg leading-relaxed">
-                            "Write a professional LinkedIn post announcing our Series A funding of $5M led by Glyphz
-                            Ventures. Tone should be grateful and excited."
+                            {{ $promptGeneration->context_description }}
                         </p>
                     </div>
                 </div>
@@ -64,37 +63,13 @@
                             <div class="w-3 h-3 rounded-full bg-amber-400"></div>
                             <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
                         </div>
-                        <div class="flex gap-2">
-                            <button
-                                class="text-slate-400 hover:text-indigo-600 text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors flex items-center gap-2">
-                                <i class="fa-regular fa-copy"></i> Copy Text
-                            </button>
-                            <button
-                                class="text-slate-400 hover:text-indigo-600 text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors flex items-center gap-2">
-                                <i class="fa-solid fa-pen"></i> Edit
-                            </button>
-                        </div>
+
                     </div>
 
                     {{-- Content Body --}}
                     <div class="p-10 flex-1">
-                        <h1 class="text-3xl font-black text-slate-900 mb-8 leading-tight">Big News: We've Raised Series A!
-                            🚀</h1>
-
                         <div class="prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed font-serif">
-                            <p>I am beyond thrilled to share that <strong class="text-slate-800">[Company Name]</strong> has
-                                officially raised <strong class="text-slate-800">$5M in Series A funding</strong>, led by
-                                the incredible team at <strong class="text-slate-800">Glyphz Ventures</strong>!</p>
-
-                            <p>This milestone isn't just about capital; it's a validation of our vision to revolutionize
-                                [Industry Name] and a testament to the hard work of our dedicated team.</p>
-
-                            <p>To our customers, partners, and early believers: Thank you. We wouldn't be here without your
-                                trust.</p>
-
-                            <p>The real work starts now. We are hiring across Engineering and Sales—come build with us!</p>
-
-                            <p class="text-indigo-600 font-medium">#SeriesA #Startup #Funding #Growth #TechNews</p>
+                            <p>{{ $promptGeneration->generated_result }}</p>
                         </div>
                     </div>
                 </div>
@@ -115,8 +90,7 @@
                         <div class="flex items-center justify-between group">
                             <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Platform</span>
                             <div class="flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">
-                                <i class="fa-brands fa-linkedin text-blue-600"></i>
-                                <span class="text-sm font-bold text-blue-700">LinkedIn</span>
+                                <span class="text-sm font-bold text-blue-700">{{ $promptGeneration->platform->name }}</span>
                             </div>
                         </div>
 
@@ -125,14 +99,15 @@
                             <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Tone</span>
                             <span
                                 class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 text-sm font-bold border border-slate-200">
-                                Professional
+                                {{ $promptGeneration->tone->name }}
                             </span>
                         </div>
 
                         {{-- Item --}}
                         <div class="flex items-center justify-between group">
                             <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Date</span>
-                            <span class="text-sm font-bold text-slate-700">Jan 15, 2026</span>
+                            <span
+                                class="text-sm font-bold text-slate-700">{{ $promptGeneration->created_at->translatedFormat('l, d F Y') }}</span>
                         </div>
 
                         {{-- Cost Badge --}}
@@ -150,17 +125,7 @@
                     </div>
                 </div>
 
-                {{-- Stats Grid --}}
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm text-center">
-                        <div class="text-3xl font-black text-slate-900 tracking-tight">142</div>
-                        <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Words</div>
-                    </div>
-                    <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm text-center">
-                        <div class="text-3xl font-black text-slate-900 tracking-tight">850</div>
-                        <div class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Chars</div>
-                    </div>
-                </div>
+
 
                 {{-- Export Actions --}}
                 <div

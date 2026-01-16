@@ -20,20 +20,17 @@ return new class extends Migration
             $table->foreignId('platform_id')->constrained('platforms')->onDelete('restrict');
             $table->foreignId('tone_id')->constrained('tones')->onDelete('restrict');
             $table->foreignId('language_id')->constrained('languages')->onDelete('restrict');
+            $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
 
             // --- DATA SPESIFIK TRANSAKSI ---
-            // Output type biasanya logic statis, jadi Enum masih oke disini
-            // Tapi kalau mau dipisah jadi master juga boleh. Disini saya pakai Enum.
-            $table->enum('output_type', ['title', 'description', 'both'])->default('both');
+            // Output type
+            $table->string('output_type')->nullable();
 
             // Konteks user (Input manual user)
             $table->text('context_description');
 
             // Hasil Generate AI
             $table->longText('generated_result')->nullable();
-
-            // Status
-            $table->string('status')->default('pending'); // pending, processing, completed, failed
 
             $table->timestamps();
         });

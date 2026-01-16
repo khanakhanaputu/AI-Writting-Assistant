@@ -24,7 +24,7 @@ class AuthUser
 
         Auth::login($user);
 
-        return redirect('/ai');
+        return redirect('/dashboard');
     }
 
     public function login($username, $password)
@@ -45,7 +45,12 @@ class AuthUser
         $googleUser = $provider->stateless()->user();
         $user = User::where('g_id', $googleUser->id)->first();
 
+
         if (!$user) {
+            $email = User::where('email', $googleUser->email)->first();
+            if ($email) {
+                return redirect('/login')->withErrors('user already exits');
+            }
             $user = User::create([
                 'name' => $googleUser->name,
                 'email' => $googleUser->email,

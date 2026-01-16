@@ -41,7 +41,7 @@
                 <div class="relative w-56 h-56 mx-auto my-6">
                     <canvas id="creditChart"></canvas>
                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <span class="text-5xl font-black text-slate-900 tracking-tight">50</span>
+                        <span class="text-5xl font-black text-slate-900 tracking-tight">{{ auth()->user()->credit }}</span>
                         <span class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Credits Left</span>
                     </div>
                 </div>
@@ -49,10 +49,8 @@
                 <div
                     class="mt-auto bg-slate-50 rounded-2xl p-4 flex justify-between text-xs font-bold text-slate-600 border border-slate-100">
                     <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-indigo-600 shadow-sm shadow-indigo-300"></span> Used (450)
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-slate-200 shadow-sm"></span> Total (500)
+                        <span class="w-3 h-3 rounded-full bg-indigo-600 shadow-sm shadow-indigo-300"></span> Used
+                        ({{ 10 - auth()->user()->credit }})
                     </div>
                 </div>
             </div>
@@ -99,23 +97,14 @@
                 <div
                     class="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/40 flex flex-col justify-center h-full hover:border-indigo-200 transition-colors">
                     <div class="flex items-start justify-between mb-6">
-                        <div
-                            class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center text-2xl shadow-sm">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </div>
                         <span
-                            class="px-2 py-1 rounded bg-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-500">Most
+                            class="px-2 py-1 rounded bg-slate-100 text-[10px] font-bold uppercase tracking-wider text-blue-500">Most
                             Active</span>
                     </div>
 
                     <div>
                         <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Top Platform</p>
-                        <h4 class="text-2xl font-extrabold text-slate-900 mb-4">LinkedIn</h4>
-
-                        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                            <div class="bg-blue-600 h-3 rounded-full shadow-sm" style="width: 70%"></div>
-                        </div>
-                        <p class="text-right text-[10px] font-bold text-slate-400 mt-2">70% Activity</p>
+                        <h4 class="text-2xl font-extrabold text-slate-900 mb-4">{{ $platformUsed ?? 'None' }}</h4>
                     </div>
                 </div>
 
@@ -127,18 +116,12 @@
                             class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-2xl shadow-sm">
                             <i class="fa-solid fa-calendar-day"></i>
                         </div>
-                        <span
-                            class="px-2 py-1 rounded bg-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-500">Average</span>
                     </div>
 
                     <div>
                         <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Daily Output</p>
-                        <h4 class="text-2xl font-extrabold text-slate-900 mb-4">~12 Posts</h4>
+                        <h4 class="text-2xl font-extrabold text-slate-900 mb-4">{{ $resultToday }} Posts</h4>
 
-                        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                            <div class="bg-emerald-500 h-3 rounded-full shadow-sm" style="width: 45%"></div>
-                        </div>
-                        <p class="text-right text-[10px] font-bold text-slate-400 mt-2">Moderate Pace</p>
                     </div>
                 </div>
 
@@ -307,8 +290,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('creditChart').getContext('2d');
 
-            const usedCredit = 450;
-            const remainingCredit = 50;
+            const usedCredit = 10 - {{ auth()->user()->credit }};
+            const remainingCredit = {{ auth()->user()->credit }};
 
             new Chart(ctx, {
                 type: 'doughnut',

@@ -22,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'g_id'
+        'g_id',
+        'credit'
     ];
 
     /**
@@ -49,6 +50,6 @@ class User extends Authenticatable
     }
     public function contentGenerations(): HasMany
     {
-        return $this->hasMany(ContentGeneration::class);
+        return $this->hasMany(PromptGeneration::class);
     }
 }

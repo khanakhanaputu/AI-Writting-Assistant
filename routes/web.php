@@ -5,29 +5,42 @@ use App\Http\Controllers\AuthGoogleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserGenerateController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+// Route Authentication & Public (Biarkan di luar)
+Route::get('/', fn() => view('welcome'));
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/register', 'register')->name('register.form');
+    Route::post('/register', 'store')->name('register.store');
+    Route::get('/login', 'loginForm')->name('login');
+    Route::post('/login', 'login')->name('user.login');
+    Route::post('/logout', 'logout')->name('user.logout');
 });
-
-Route::get('/ai', [TestController::class, 'index'])->name('ai.get')->middleware('auth');
-Route::post('/ai', [TestController::class, 'TestResponse'])->name('ai.post');
-
-Route::get('/register', [AuthController::class, 'register'])->name('register.form');
-Route::post('/register', [AuthController::class, 'store'])->name('register.store');
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
-
-Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('user.login');
-
 
 Route::get('/auth/google', [AuthGoogleController::class, 'redirect']);
 Route::get('/auth/google/callback', [AuthGoogleController::class, 'callback']);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/profile', fn() => view('pages.user.profile'));
-Route::get('/result', fn() => view('pages.reports.result'));
-Route::get('/history', fn() => view('pages.reports.history'));
-Route::get('/generate', [DashboardController::class, 'generatePage']);
+// --- PENGELOMPOKAN ROUTE DASHBOARD ---
+// Kita gunakan middleware 'auth' agar semua halaman di dalam group ini 
+// hanya bisa diakses setelah login.
+Route::middleware(['auth'])->group(function () {
+
+    // Menggunakan prefix 'dashboard' jika ingin URL-nya menjadi /dashboard/history, dll.
+    // Jika ingin tetap /history (tanpa prefix), hapus bagian ->prefix('dashboard')
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/history', 'history')->name('history');
+        Route::get('/generate', 'generatePage')->name('generate.page');
+        Route::get('/result/{promptGeneration}', 'result')->name('generate.result');
+    });
+
+    // Profile & Generate Action
+    Route::get('/profile', fn() => view('pages.user.profile'))->name('profile');
+    Route::post('/generate', [UserGenerateController::class, 'generate'])->name('genarete.post');
+
+    // Route AI Test Anda sebelumnya
+    Route::get('/ai', [TestController::class, 'index'])->name('ai.get');
+    Route::post('/ai', [TestController::class, 'TestResponse'])->name('ai.post');
+});

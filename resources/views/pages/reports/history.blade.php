@@ -55,147 +55,51 @@
                     </thead>
                     <tbody class="divide-y divide-slate-100">
 
-                        {{-- Row Item 1 --}}
-                        <tr class="group hover:bg-slate-50/80 transition-all duration-200 relative">
-                            <td
-                                class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            </td>
+                        @foreach ($historys as $h)
+                            <tr class="group hover:bg-slate-50/80 transition-all duration-200 relative">
 
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4"> {{-- Changed items-start to items-center --}}
+
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-4"> {{-- Changed items-start to items-center --}}
+                                        <div
+                                            class="w-11 h-11 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center flex-shrink-0 shadow-sm">
+                                            <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                                        </div>
+                                        <div class="max-w-md">
+                                            <a href="{{ route('generate.result', $h->id) }}"
+                                                class="block text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                                                {{ $h->context_description }}
+                                            </a>
+                                            {{-- Removed Prompt Details <p> --}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 align-middle">
                                     <div
-                                        class="w-11 h-11 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center flex-shrink-0 shadow-sm">
-                                        <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-100 bg-blue-50 text-xs font-bold text-blue-700">
+                                        {{ $h->platform->name }}
                                     </div>
-                                    <div class="max-w-md">
-                                        <a href="#"
-                                            class="block text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
-                                            Big News: We've Raised Series A! 🚀
-                                        </a>
-                                        {{-- Removed Prompt Details <p> --}}
+                                </td>
+                                <td class="px-6 py-5 align-middle">
+                                    <span
+                                        class="inline-block px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
+                                        {{ $h->tone->name }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 align-middle">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-sm font-bold text-slate-700">{{ $h->created_at->translatedFormat('l, d F Y') }}</span>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <div
-                                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-100 bg-blue-50 text-xs font-bold text-blue-700">
-                                    <i class="fa-brands fa-linkedin"></i> LinkedIn
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <span
-                                    class="inline-block px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
-                                    Professional
-                                </span>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold text-slate-700">Jan 15, 2026</span>
-                                    <span class="text-xs text-slate-400 font-medium">10:42 AM</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-center align-middle">
-                                <button
-                                    class="w-9 h-9 inline-flex items-center justify-center rounded-lg border border-transparent text-slate-400 hover:text-indigo-600 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-                        {{-- Row Item 2 --}}
-                        <tr class="group hover:bg-slate-50/80 transition-all duration-200 relative">
-                            <td
-                                class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            </td>
-
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-11 h-11 rounded-lg bg-pink-50 text-pink-600 border border-pink-100 flex items-center justify-center flex-shrink-0 shadow-sm">
-                                        <i class="fa-solid fa-camera text-lg"></i>
-                                    </div>
-                                    <div class="max-w-md">
-                                        <a href="#"
-                                            class="block text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
-                                            Bali Hidden Gems 🌴
-                                        </a>
-                                        {{-- Removed Prompt Details <p> --}}
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <div
-                                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-pink-100 bg-pink-50 text-xs font-bold text-pink-700">
-                                    <i class="fa-brands fa-instagram"></i> Instagram
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <span
-                                    class="inline-block px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
-                                    Excited
-                                </span>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold text-slate-700">Jan 14, 2026</span>
-                                    <span class="text-xs text-slate-400 font-medium">04:20 PM</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-center align-middle">
-                                <button
-                                    class="w-9 h-9 inline-flex items-center justify-center rounded-lg border border-transparent text-slate-400 hover:text-indigo-600 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </td>
-                        </tr>
-
-                        {{-- Row Item 3 --}}
-                        <tr class="group hover:bg-slate-50/80 transition-all duration-200 relative">
-                            <td
-                                class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            </td>
-
-                            <td class="px-6 py-5">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-11 h-11 rounded-lg bg-amber-50 text-amber-600 border border-amber-100 flex items-center justify-center flex-shrink-0 shadow-sm">
-                                        <i class="fa-solid fa-envelope text-lg"></i>
-                                    </div>
-                                    <div class="max-w-md">
-                                        <a href="#"
-                                            class="block text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
-                                            Cold Outreach: Partnership
-                                        </a>
-                                        {{-- Removed Prompt Details <p> --}}
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <div
-                                    class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-100 bg-amber-50 text-xs font-bold text-amber-700">
-                                    <i class="fa-regular fa-envelope"></i> Email
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <span
-                                    class="inline-block px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
-                                    Persuasive
-                                </span>
-                            </td>
-                            <td class="px-6 py-5 align-middle">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold text-slate-700">Jan 12, 2026</span>
-                                    <span class="text-xs text-slate-400 font-medium">09:15 AM</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5 text-center align-middle">
-                                <button
-                                    class="w-9 h-9 inline-flex items-center justify-center rounded-lg border border-transparent text-slate-400 hover:text-indigo-600 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </button>
-                            </td>
-                        </tr>
-
+                                </td>
+                                <td class="px-6 py-5 text-center align-middle">
+                                    <button
+                                        class="w-9 h-9 inline-flex items-center justify-center rounded-lg border border-transparent text-slate-400 hover:text-indigo-600 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -82,7 +82,8 @@
                         <div>
                             <p class="text-indigo-100 text-sm font-bold uppercase tracking-widest mb-1 opacity-80">Total
                                 Content Generated</p>
-                            <h3 class="text-6xl font-black tracking-tighter text-white drop-shadow-sm">450</h3>
+                            <h3 class="text-6xl font-black tracking-tighter text-white drop-shadow-sm">
+                                {{ $countUserCreated }}</h3>
                         </div>
                     </div>
 
@@ -129,161 +130,73 @@
         </div>
 
         {{-- Recent Activity Table --}}
-        <div class="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/60 overflow-hidden">
-            <div
-                class="px-8 py-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50/30">
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900">Recent Activity</h3>
-                    <p class="text-sm text-slate-500 font-medium">History of your generated content (Last 7 Days).</p>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span
-                        class="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">
-                        Showing latest 3 of 24
-                    </span>
-                    <button
-                        class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-200 transition-colors shadow-sm">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
+        <div
+            class="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 overflow-hidden flex flex-col ">
 
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto flex-1">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr
-                            class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500 font-extrabold">
-                            <th class="px-8 py-5">Result Preview</th>
+                            class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500 font-bold">
+                            <th class="px-6 py-5">Generated Content</th> {{-- Renamed from Content Details --}}
                             <th class="px-6 py-5">Platform</th>
                             <th class="px-6 py-5">Tone</th>
-                            <th class="px-6 py-5">Cost</th>
-                            <th class="px-6 py-5 text-right">Date</th>
+                            <th class="px-6 py-5">Date Created</th>
+                            <th class="px-6 py-5 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        {{-- Row 1 --}}
-                        <tr class="group hover:bg-slate-50/80 transition-all relative">
-                            <td
-                                class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            </td>
-                            <td class="px-8 py-5">
-                                <div
-                                    class="font-bold text-slate-900 truncate max-w-[280px] group-hover:text-indigo-600 transition-colors text-base">
-                                    "We are thrilled to announce our Series A funding..."
-                                </div>
-                                <div class="flex items-center gap-1.5 mt-1.5">
-                                    <i class="fa-solid fa-terminal text-[10px] text-slate-300"></i>
-                                    <span class="text-xs text-slate-500 font-medium">Prompt: Write a funding
-                                        announcement</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div
-                                    class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg border border-slate-200 bg-white shadow-sm">
-                                    <i class="fa-brands fa-linkedin text-blue-600 text-sm"></i>
-                                    <span class="text-slate-700 text-xs font-bold">LinkedIn</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">Professional</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span
-                                    class="text-xs font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">-1
-                                    Credit</span>
-                            </td>
-                            <td class="px-6 py-5 text-right">
-                                <div class="flex flex-col items-end">
-                                    <span class="text-sm font-bold text-slate-700">Today</span>
-                                    <span class="text-xs text-slate-400 font-medium">10:23 AM</span>
-                                </div>
-                            </td>
-                        </tr>
 
-                        {{-- Row 2 --}}
-                        <tr class="group hover:bg-slate-50/80 transition-all relative">
-                            <td
-                                class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            </td>
-                            <td class="px-8 py-5">
-                                <div
-                                    class="font-bold text-slate-900 truncate max-w-[280px] group-hover:text-indigo-600 transition-colors text-base">
-                                    "Hidden gem in Bali you must visit! 🌴 #Travel"
-                                </div>
-                                <div class="flex items-center gap-1.5 mt-1.5">
-                                    <i class="fa-solid fa-terminal text-[10px] text-slate-300"></i>
-                                    <span class="text-xs text-slate-500 font-medium">Prompt: Bali hidden gem caption</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div
-                                    class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg border border-slate-200 bg-white shadow-sm">
-                                    <i class="fa-brands fa-instagram text-pink-600 text-sm"></i>
-                                    <span class="text-slate-700 text-xs font-bold">Instagram</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">Excited</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span
-                                    class="text-xs font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">-1
-                                    Credit</span>
-                            </td>
-                            <td class="px-6 py-5 text-right">
-                                <div class="flex flex-col items-end">
-                                    <span class="text-sm font-bold text-slate-700">Yesterday</span>
-                                    <span class="text-xs text-slate-400 font-medium">4:15 PM</span>
-                                </div>
-                            </td>
-                        </tr>
+                        @foreach ($recent as $h)
+                            <tr class="group hover:bg-slate-50/80 transition-all duration-200 relative">
 
-                        {{-- Row 3 --}}
-                        <tr class="group hover:bg-slate-50/80 transition-all relative">
-                            <td
-                                class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                            </td>
-                            <td class="px-8 py-5">
-                                <div
-                                    class="font-bold text-slate-900 truncate max-w-[280px] group-hover:text-indigo-600 transition-colors text-base">
-                                    "Is your team struggling with productivity? Here is why..."
-                                </div>
-                                <div class="flex items-center gap-1.5 mt-1.5">
-                                    <i class="fa-solid fa-terminal text-[10px] text-slate-300"></i>
-                                    <span class="text-xs text-slate-500 font-medium">Prompt: Productivity thread
-                                        hook</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5">
-                                <div
-                                    class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg border border-slate-200 bg-white shadow-sm">
-                                    <i class="fa-brands fa-twitter text-sky-500 text-sm"></i>
-                                    <span class="text-slate-700 text-xs font-bold">Twitter</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span
-                                    class="px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">Persuasive</span>
-                            </td>
-                            <td class="px-6 py-5">
-                                <span
-                                    class="text-xs font-bold text-slate-900 bg-slate-100 px-2 py-1 rounded border border-slate-200">-1
-                                    Credit</span>
-                            </td>
-                            <td class="px-6 py-5 text-right">
-                                <div class="flex flex-col items-end">
-                                    <span class="text-sm font-bold text-slate-700">Jan 12</span>
-                                    <span class="text-xs text-slate-400 font-medium">09:00 AM</span>
-                                </div>
-                            </td>
-                        </tr>
+
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-11 h-11 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center flex-shrink-0 shadow-sm">
+                                            <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                                        </div>
+                                        <div class="max-w-md">
+                                            <a href="{{ route('generate.result', $h->id) }}"
+                                                class="block text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                                                {{ Str::limit($h->context_description, 40) }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 align-middle">
+                                    <div
+                                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-100 bg-blue-50 text-xs font-bold text-blue-700">
+                                        {{ $h->platform->name }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 align-middle">
+                                    <span
+                                        class="inline-block px-3 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-bold border border-slate-200">
+                                        {{ $h->tone->name }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5 align-middle">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-sm font-bold text-slate-700">{{ $h->created_at->translatedFormat('l, d F Y') }}</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-center align-middle">
+                                    <button
+                                        class="w-9 h-9 inline-flex items-center justify-center rounded-lg border border-transparent text-slate-400 hover:text-indigo-600 hover:bg-white hover:border-slate-200 hover:shadow-sm transition-all">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
 
+        </div>
+    </div>
     </div>
 
     <script>

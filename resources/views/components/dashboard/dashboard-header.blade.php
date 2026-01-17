@@ -12,18 +12,18 @@
         <div class="flex items-center gap-4">
 
 
-            <div class="flex items-center gap-3 cursor-pointer group">
-                <div class="text-right hidden md:block">
-                    <div class="text-sm font-bold text-slate-700 leading-none">{{ $name }}</div>
-                    <div class="text-[10px] font-medium text-gray-400 mt-1">john@glyphz.ai</div>
+            <a href="{{ route('profile') }}">
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="text-right hidden md:block">
+                        <div class="text-sm font-bold text-slate-700 leading-none">{{ $name }}</div>
+                        <div class="text-[10px] font-medium text-gray-400 mt-1">{{ auth()->user()->email }}</div>
+                    </div>
+
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff&size=128"
+                        alt="Profile" class="w-9 h-9 rounded-full ring-2 ring-white shadow-sm object-cover">
+
                 </div>
-
-                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff&size=128" alt="Profile"
-                    class="w-9 h-9 rounded-full ring-2 ring-white shadow-sm object-cover">
-
-                <i
-                    class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-indigo-600 transition-colors"></i>
-            </div>
+            </a>
         </div>
     </div>
 </header>

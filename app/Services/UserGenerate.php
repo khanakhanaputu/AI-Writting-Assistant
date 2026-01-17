@@ -81,6 +81,8 @@ class UserGenerate
 
         6. HANYA berikan hasil konten akhir. JANGAN ada kata pengantar seperti 'Berikut hasilnya' atau 'Tentu'.
 
+        7. Buat dengan format html namun cuma bisa list, p, dan h
+
 
 
         --- MULAI ---
@@ -88,11 +90,7 @@ class UserGenerate
 
         // Ambil hasil dari AI Service
         $aiResponse = $this->aiservice->AiFetch($template);
-
-        // Kurangi Credit jika berhasil 
-        if (!str_contains($aiResponse, 'ERROR')) {
-            $this->deductCredit($user);
-        }
+        $this->deductCredit($user);
 
         $prompt_generation = PromptGeneration::create([
             'platform_id' => $data['platform_id'],
@@ -105,7 +103,7 @@ class UserGenerate
 
         ]);
 
-        return $prompt_generation;
+        return redirect(route('generate.result', $prompt_generation->id));
     }
 
     private function deductCredit($user)

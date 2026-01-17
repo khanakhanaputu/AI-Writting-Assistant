@@ -69,7 +69,9 @@
                     {{-- Content Body --}}
                     <div class="p-10 flex-1">
                         <div class="prose prose-lg prose-slate max-w-none text-slate-600 leading-relaxed font-serif">
-                            <p>{{ $promptGeneration->generated_result }}</p>
+                            <div>
+                                {!! $promptGeneration->generated_result !!}
+                            </div>
                         </div>
                     </div>
                 </div>

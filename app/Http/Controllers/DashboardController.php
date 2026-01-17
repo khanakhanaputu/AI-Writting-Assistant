@@ -27,7 +27,9 @@ class DashboardController extends Controller
             ->first()
             ?->platform->name;
         $resultToday = PromptGeneration::where('user_id', Auth::user()->id)->whereDate('created_at', Carbon::today())->count();
-        return view('pages.dashboard.index', compact('tones', 'platforms', 'languages', 'platformUsed', 'resultToday'));
+        $countUserCreated = PromptGeneration::where('user_id', Auth::user()->id)->count();
+        $recent = PromptGeneration::where('user_id', Auth::user()->id)->latest()->limit(3)->get();
+        return view('pages.dashboard.index', compact('tones', 'platforms', 'languages', 'platformUsed', 'resultToday', 'countUserCreated', 'recent'));
     }
     public function generatePage()
     {

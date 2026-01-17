@@ -12,21 +12,21 @@
 
             <div class="flex flex-col sm:flex-row gap-3">
                 {{-- Search --}}
-                <div class="relative group w-full sm:w-auto">
+                {{-- <div class="relative group w-full sm:w-auto">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i
                             class="fa-solid fa-magnifying-glass text-slate-400 group-focus-within:text-indigo-600 transition-colors"></i>
                     </div>
                     <input type="text" placeholder="Search history..."
                         class="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 w-full sm:w-64 transition-all shadow-sm">
-                </div>
+                </div> --}}
 
                 {{-- Filter Button --}}
-                <button
+                {{-- <button
                     class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 hover:border-indigo-200 transition-all shadow-sm active:scale-95">
                     <i class="fa-solid fa-filter text-slate-400"></i>
                     <span>Filters</span>
-                </button>
+                </button> --}}
 
                 {{-- Export Button --}}
                 <button
@@ -39,14 +39,14 @@
 
         {{-- Main Content Card --}}
         <div
-            class="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 overflow-hidden flex flex-col min-h-[600px]">
+            class="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 overflow-hidden flex flex-col">
 
             <div class="overflow-x-auto flex-1">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr
                             class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500 font-bold">
-                            <th class="px-6 py-5">Generated Content</th> {{-- Renamed from Content Details --}}
+                            <th class="px-6 py-5">Generated Content</th>
                             <th class="px-6 py-5">Platform</th>
                             <th class="px-6 py-5">Tone</th>
                             <th class="px-6 py-5">Date Created</th>
@@ -68,9 +68,8 @@
                                         <div class="max-w-md">
                                             <a href="{{ route('generate.result', $h->id) }}"
                                                 class="block text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
-                                                {{ $h->context_description }}
+                                                {{ Str::limit($h->context_description, 100) }}
                                             </a>
-                                            {{-- Removed Prompt Details <p> --}}
                                         </div>
                                     </div>
                                 </td>
@@ -107,22 +106,7 @@
             {{-- Footer Pagination --}}
             <div
                 class="px-6 py-5 border-t border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-slate-500 font-medium">
-                    Showing <span class="font-bold text-slate-900">1-4</span> of <span
-                        class="font-bold text-slate-900">24</span> results
-                </p>
-
-                <div class="flex items-center gap-2">
-                    <button
-                        class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-400 cursor-not-allowed shadow-sm opacity-60"
-                        disabled>
-                        Previous
-                    </button>
-                    <button
-                        class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all shadow-sm">
-                        Next
-                    </button>
-                </div>
+                {{ $historys->links() }}
             </div>
 
         </div>

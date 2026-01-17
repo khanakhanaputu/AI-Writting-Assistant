@@ -31,7 +31,7 @@ class AuthUser
     {
         if (Auth::attempt(['name' => $username, 'password' => $password])) {
             session()->regenerate();
-            return redirect()->intended('/ai');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors(['msg' => 'Username dan Password salah']);

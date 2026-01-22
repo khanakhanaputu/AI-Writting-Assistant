@@ -1,6 +1,11 @@
 @extends('layouts.dashboard-layout')
 
 @section('dashboard-content')
+    {{-- DEFINISI VARIABEL: Cek apakah user login via Google --}}
+    @php
+        $isGoogleUser = !empty(auth()->user()->g_id);
+    @endphp
+
     <div class="max-w-full mx-auto p-6">
 
         {{-- Page Header --}}
@@ -27,6 +32,19 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            </div>
+        @endif
+
+        {{-- GOOGLE ACCOUNT ALERT: Tampil hanya jika user punya g_id --}}
+        @if ($isGoogleUser)
+            <div
+                class="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-xl flex items-start gap-3 text-blue-800 text-sm font-bold shadow-sm">
+                <i class="fa-brands fa-google mt-0.5 text-blue-600 text-lg"></i>
+                <div>
+                    <p>Your account is managed via Google.</p>
+                    <p class="font-medium text-blue-600/80 text-xs mt-1">Profile details and password cannot be changed
+                        here.</p>
+                </div>
             </div>
         @endif
 
@@ -94,18 +112,21 @@
                                     <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
                                         <i class="fa-regular fa-envelope"></i>
                                     </span>
+
+                                    {{-- LOGIC: Disabled jika Google User --}}
                                     <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}"
-                                        required
-                                        class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all text-sm font-bold shadow-sm placeholder:font-medium">
+                                        readonly disabled {{ $isGoogleUser ? 'disabled' : '' }}
+                                        class="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all text-sm font-bold shadow-sm placeholder:font-medium 
+                                        disabled:bg-slate-100 disabled:text-slate-500 disabled:cursor-not-allowed disabled:shadow-inner">
+
+                                    @if ($isGoogleUser)
+                                        <div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"
+                                            title="Managed by Google">
+                                            <i class="fa-brands fa-google"></i>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="flex justify-end pt-2">
-                            <button type="submit"
-                                class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/30 transition-all active:scale-[0.98]">
-                                Save Changes
-                            </button>
                         </div>
                     </div>
                 </form>
@@ -128,30 +149,39 @@
             </div>
 
             <div class="p-8">
-                <form action="" method="POST">
+                <form action="{{ route('update.password') }}" method="POST">
                     @csrf
                     @method('PUT')
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+
+                        {{-- Overlay jika disabled (Optional visual cue) --}}
+                        @if ($isGoogleUser)
+                            <div class="absolute inset-0 z-10 bg-white/50 cursor-not-allowed"></div>
+                        @endif
+
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Current
                                 Password</label>
                             <input type="password" name="current_password" placeholder="••••••••" required
-                                class="w-full px-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-4 focus:ring-slate-200 transition-all text-sm font-bold shadow-sm">
+                                {{ $isGoogleUser ? 'disabled' : '' }}
+                                class="w-full px-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-4 focus:ring-slate-200 transition-all text-sm font-bold shadow-sm disabled:bg-slate-100 disabled:text-slate-400">
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">New
                                 Password</label>
                             <input type="password" name="password" placeholder="••••••••" required
-                                class="w-full px-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-4 focus:ring-slate-200 transition-all text-sm font-bold shadow-sm">
+                                {{ $isGoogleUser ? 'disabled' : '' }}
+                                class="w-full px-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-4 focus:ring-slate-200 transition-all text-sm font-bold shadow-sm disabled:bg-slate-100 disabled:text-slate-400">
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Confirm
                                 Password</label>
                             <input type="password" name="password_confirmation" placeholder="••••••••" required
-                                class="w-full px-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-4 focus:ring-slate-200 transition-all text-sm font-bold shadow-sm">
+                                {{ $isGoogleUser ? 'disabled' : '' }}
+                                class="w-full px-4 py-3 bg-white border border-slate-200 text-slate-900 rounded-xl focus:outline-none focus:border-slate-800 focus:ring-4 focus:ring-slate-200 transition-all text-sm font-bold shadow-sm disabled:bg-slate-100 disabled:text-slate-400">
                         </div>
                     </div>
 
@@ -160,8 +190,13 @@
                             <i class="fa-solid fa-lock"></i>
                             <span>Your password is encrypted securely.</span>
                         </div>
-                        <button type="submit"
-                            class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-slate-300 transition-all active:scale-[0.98]">
+
+                        {{-- LOGIC: Button Disabled jika Google User --}}
+                        <button type="submit" {{ $isGoogleUser ? 'disabled' : '' }}
+                            class="px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg transition-all active:scale-[0.98]
+                            {{ $isGoogleUser
+                                ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
+                                : 'bg-slate-900 hover:bg-slate-800 text-white shadow-slate-300' }}">
                             Update Password
                         </button>
                     </div>
@@ -170,6 +205,7 @@
         </div>
 
         {{-- SECTION 3: Danger Zone (Logout) --}}
+        {{-- Logout tetap aktif (tidak di-disable) --}}
         <div class="border border-rose-100 rounded-2xl overflow-hidden bg-rose-50/30">
             <div class="p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div>

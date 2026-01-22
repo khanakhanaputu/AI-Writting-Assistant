@@ -21,7 +21,6 @@ class UserGenerateController extends Controller
             'tone_id'       => 'required|exists:tones,id',      // Cek apakah ID ada di tabel tones
             'output_length' => 'nullable|string|max:100',
         ], [
-
             'platform_id.exists' => 'Platform yang dipilih tidak valid.',
             'tone_id.exists'     => 'Tone yang dipilih tidak tersedia.',
             'language_id.exists' => 'Bahasa yang dipilih tidak didukung.',

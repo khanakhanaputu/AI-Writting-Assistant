@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\AuthUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -51,5 +53,30 @@ class AuthController extends Controller
     public function loginForm()
     {
         return view('pages.user.login');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|min:8'
+        ]);
+
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return redirect()->back()->withErrors('Wrong Password My Ni');
+        }
+
+        if ($validated['password_confirmation'] !== $validated['password']) {
+            return redirect()->back()->withErrors('Password Not Same!');
+        }
+
+        User::where('id', $user->id)->update([
+            'password' => Hash::make($validated['password'])
+        ]);
+
+        return "sukses";
     }
 }

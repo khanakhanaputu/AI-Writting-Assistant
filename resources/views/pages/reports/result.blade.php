@@ -6,7 +6,7 @@
         {{-- Navigation & Title Header --}}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div class="flex items-center gap-4">
-                <a href="{{ url()->previous() }}"
+                <a href="{{ route('history') }}"
                     class="w-12 h-12 rounded-xl bg-white border border-slate-200 text-slate-500 hover:text-indigo-600 hover:border-indigo-200 flex items-center justify-center transition-all hover:-translate-x-1 shadow-sm group">
                     <i class="fa-solid fa-arrow-left group-hover:scale-110 transition-transform"></i>
                 </a>
@@ -142,17 +142,11 @@
                         result.</p>
 
                     <div class="space-y-3 relative z-10">
-                        <button
+                        <a href="{{ route('export.pdf', $promptGeneration->id) }}"
                             class="w-full flex items-center justify-center gap-3 py-3.5 rounded-xl bg-white text-indigo-900 text-sm font-bold hover:bg-indigo-50 transition-all shadow-lg active:scale-95">
                             <i class="fa-solid fa-file-pdf text-rose-500"></i>
                             Export to PDF
-                        </button>
-
-                        <button
-                            class="w-full flex items-center justify-center gap-3 py-3.5 rounded-xl bg-indigo-500/30 border border-white/20 text-white text-sm font-bold hover:bg-indigo-500/50 hover:border-white/40 transition-all backdrop-blur-sm">
-                            <i class="fa-solid fa-file-lines"></i>
-                            Copy Plain Text
-                        </button>
+                        </a>
                     </div>
                 </div>
 

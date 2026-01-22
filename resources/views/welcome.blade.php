@@ -1,3 +1,9 @@
+@php
+    if (auth()->check() === true) {
+        redirect(route('dashboard'));
+    }
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Home')

@@ -17,27 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        Tone::truncate();
-        Tone::insert([
-            [
-                'tone_name' => 'funny',
-                'description' => 'agar menjadi tone lebih senang mantap dan keren'
-            ],
-            [
-                'tone_name' => 'professional',
-                'description' => 'untuk profesional dan orang serius mantap jiwa'
-            ]
-        ]);
+        // 1. Master Data (Platforms, Tones, Languages)
+        $this->call(MasterDataSeeder::class);
 
-        Platform::truncate();
-        Platform::insert([
-            [
-                'platform_name' => 'instagram'
-            ],
-            [
-                'platform_name' => 'Facebook                                                                                                        '
-            ]
-        ]);
+        // 2. Create Users (1000 users, password '1234567890')
+        $users = User::factory(1000)->create();
+
+        // 3. Create Transactions (10000 records)
+        // Recycle users to avoid creating new ones, and ensure foreign keys are valid.
+        \App\Models\PromptGeneration::factory(10000)
+            ->recycle($users)
+            ->create();
     }
 }

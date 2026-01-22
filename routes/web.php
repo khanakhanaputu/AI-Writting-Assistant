@@ -4,12 +4,14 @@ use App\Http\Controllers\AuthGoogleController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportExcel;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserGenerateController;
 use Illuminate\Support\Facades\Route;
 
 // Route Authentication & Public (Biarkan di luar)
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn() => view('welcome'))->middleware('guest');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('register.form');
@@ -43,4 +45,9 @@ Route::middleware(['auth'])->group(function () {
     // Route AI Test Anda sebelumnya
     Route::get('/ai', [TestController::class, 'index'])->name('ai.get');
     Route::post('/ai', [TestController::class, 'TestResponse'])->name('ai.post');
+
+    Route::get('/download/{id}', [PdfController::class, 'ExportPDF'])->name('export.pdf');
+    Route::get('/download-excel', [ExportExcel::class, 'DownloadExcel'])->name('export.excel');
+
+    Route::put('/update/password', [AuthController::class, 'resetPassword'])->name('update.password');
 });

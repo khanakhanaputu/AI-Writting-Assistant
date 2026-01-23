@@ -16,6 +16,6 @@ class PdfController extends Controller
         $pdf = Pdf::loadView('exportpdf', compact('data'));
         $date = Carbon::today();
         $random = rand(10, 100);
-        return $pdf->download("Generated-$date-$random");
+        return $pdf->download("Generated-$date-$random.pdf");
     }
 }

@@ -77,6 +77,6 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password'])
         ]);
 
-        return "sukses";
+        return redirect()->back()->withErrors('Suskes');
     }
 }

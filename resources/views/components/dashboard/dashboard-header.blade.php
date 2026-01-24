@@ -8,7 +8,7 @@
 
         <div>
             <h2 class="text-lg lg:text-xl font-bold text-slate-800">Dashboard</h2>
-            <p class="text-[10px] lg:text-xs text-gray-500">Welcome back, John</p>
+            <p class="text-[10px] lg:text-xs text-gray-500">Welcome back, {{ auth()->user()->name }}</p>
         </div>
     </div>
 

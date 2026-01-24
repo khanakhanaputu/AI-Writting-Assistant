@@ -21,11 +21,20 @@
             </div>
 
             <div class="flex gap-3">
-                <button
-                    class="px-5 py-2.5 rounded-xl bg-white border border-rose-100 text-rose-600 font-bold text-sm hover:bg-rose-50 hover:border-rose-200 transition-all shadow-sm flex items-center gap-2">
-                    <i class="fa-regular fa-trash-can"></i>
-                    <span class="hidden sm:inline">Delete</span>
-                </button>
+                <form action="{{ route('delete.result', $promptGeneration->id) }}" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this item?')">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit"
+                        class="px-5 py-2.5 rounded-xl bg-white border border-rose-100 text-rose-600 font-bold text-sm 
+               hover:bg-rose-50 hover:border-rose-200 transition-all shadow-sm flex items-center gap-2"
+                        aria-label="Delete item">
+                        <i class="fa-regular fa-trash-can"></i>
+                        <span class="hidden sm:inline">Delete</span>
+                    </button>
+                </form>
+
             </div>
         </div>
 

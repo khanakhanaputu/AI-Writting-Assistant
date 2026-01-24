@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PromptGeneration;
 use App\Services\UserGenerate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserGenerateController extends Controller
 {
@@ -27,5 +29,18 @@ class UserGenerateController extends Controller
         ]);
 
         return $this->generateResponse->generatePrompt($validated);
+    }
+
+    public function delete($id)
+    {
+        $user = Auth::id();
+        $item = PromptGeneration::findOrFail($id);
+
+        if ($user !== $item->user->id) {
+            abort(404, 'Who The Hell R U?');
+        }
+
+        PromptGeneration::destroy($id);
+        return redirect(route('history'))->with('msg', 'History Deleted');
     }
 }

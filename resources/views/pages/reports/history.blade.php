@@ -9,7 +9,6 @@
                 <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Generation History</h2>
                 <p class="text-slate-500 mt-2 text-base">Archive and manage all content you have created.</p>
             </div>
-
             <div class="flex flex-col sm:flex-row gap-3">
                 {{-- Search --}}
                 {{-- <div class="relative group w-full sm:w-auto">

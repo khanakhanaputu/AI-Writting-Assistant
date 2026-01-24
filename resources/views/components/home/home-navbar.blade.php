@@ -47,13 +47,13 @@
                 Login
             </a>
 
-            <button
+            <a href="{{ route('register.form') }}"
                 class="group relative overflow-hidden bg-slate-900 text-white px-6 py-2.5 rounded-2xl font-bold text-sm transition-all hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5">
                 <span class="relative z-10">Get Started</span>
                 <div
                     class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0">
                 </div>
-            </button>
+            </a>
         </div>
 
         <button @click="mobileOpen = !mobileOpen"

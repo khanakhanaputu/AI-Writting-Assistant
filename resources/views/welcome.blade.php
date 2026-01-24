@@ -1,5 +1,5 @@
 @php
-    if (auth()->check() === true) {
+    if (auth()->check()) {
         redirect(route('dashboard'));
     }
 @endphp
@@ -141,7 +141,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative">
-                <button
+                <a href="{{ route('register.form') }}"
                     class="group relative w-full sm:w-auto bg-slate-900 hover:bg-indigo-600 text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-2xl shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
                     <span class="relative z-10 flex items-center justify-center gap-2">
                         Start Writing for Free
@@ -150,11 +150,7 @@
                     <div
                         class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent z-0">
                     </div>
-                </button>
-                <button
-                    class="w-full sm:w-auto text-slate-600 hover:text-indigo-600 font-bold px-10 py-5 rounded-2xl border border-slate-200 hover:border-indigo-200 hover:bg-white transition-all">
-                    View Demo
-                </button>
+                </a>
             </div>
 
             <div class="mt-20 relative mx-auto max-w-4xl group">

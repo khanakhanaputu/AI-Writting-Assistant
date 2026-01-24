@@ -50,4 +50,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/download-excel', [ExportExcel::class, 'DownloadExcel'])->name('export.excel');
 
     Route::put('/update/password', [AuthController::class, 'resetPassword'])->name('update.password');
+    Route::delete('/delete/{id}', [UserGenerateController::class, 'delete'])->name('delete.result');
 });
